@@ -7,8 +7,10 @@ function createWindow () {
     height: 800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    frame: false
   });
+  mainWindow.setMenu(null)
 
   mainWindow.loadURL('http://localhost:3000');
 }
