@@ -36,7 +36,7 @@ export const App = () => {
         <Routes>
           <Route path='/' element={<SnackSelectionPage/>}/>
           <Route path='/admin' element={<AdminPage/>}/>
-          <Route element={<NotFoundPage/>}/>
+          <Route path='*' element={<NotFoundPage/>}/>
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
