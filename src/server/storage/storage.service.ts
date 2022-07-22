@@ -1,11 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import * as ElectronStore from 'electron-store';
 import {v4 as uuidv4} from 'uuid';
-
-interface StorageData {
-  /** The unique identifier for the device. */
-  deviceUuid: string;
-}
+import {StorageData} from './interfaces/storageData.interface';
 
 @Injectable()
 export class StorageService {
