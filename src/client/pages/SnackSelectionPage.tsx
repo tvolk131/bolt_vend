@@ -1,10 +1,11 @@
 import {Button, Card, CardActions, CardContent, Typography} from '@mui/material';
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import {getInventory, SnackOption} from '../api';
+import {ItemSlot} from '../../server/storage/interfaces/itemSlot.interface';
+import {getInventory} from '../api';
 
 const SnackSelectionPage = () => {
-  const [inventory, setInventory] = useState<SnackOption[]>([]);
+  const [inventory, setInventory] = useState<ItemSlot[]>([]);
 
   useEffect(() => {
     getInventory().then((getInventoryResponse) => setInventory(getInventoryResponse.items));

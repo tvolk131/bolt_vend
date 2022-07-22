@@ -1,9 +1,9 @@
 import {Injectable} from '@nestjs/common';
-import {SnackOption} from '../client/api';
+import {ItemSlot} from './storage/interfaces/itemSlot.interface';
 
 @Injectable()
 export class ApiService {
-  private inventory: SnackOption[];
+  private inventory: ItemSlot[];
 
   constructor() {
     // TODO - Pull data dynamically, rather
@@ -36,16 +36,17 @@ export class ApiService {
     ];
   }
 
-  public getInventory(): SnackOption[] {
+  public getInventory(): ItemSlot[] {
     return this.inventory;
   }
 
-  public getInventoryItemById(itemId: string): SnackOption|undefined {
+  // TODO - There could be multiple item slots containing the same item. This should probably return an array.
+  public getItemSlotById(itemId: string): ItemSlot|undefined {
     return this.inventory.find((item) => item.id === itemId);
   }
 
   public getInvoiceForItem(itemId: string): string {
-    const item = this.getInventoryItemById(itemId);
+    const item = this.getItemSlotById(itemId);
     if (!item) {
       throw new Error(`Item with id ${itemId} does not exist!`);
     }
