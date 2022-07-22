@@ -12,7 +12,7 @@ export interface SnackOption {
   price: number;
 
   /** The quantity of the snack option that is left in the machine. */
-  remainingStock: number;
+  stock: number;
 }
 
 export interface GetInventoryResponse {

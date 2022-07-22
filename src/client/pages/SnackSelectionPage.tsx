@@ -27,7 +27,7 @@ const SnackSelectionPage = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button disabled={item.remainingStock === 0}>Order</Button>
+              <Button disabled={item.stock === 0}>Order</Button>
             </CardActions>
           </Card>
         ))}
