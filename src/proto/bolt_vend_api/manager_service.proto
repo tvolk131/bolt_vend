@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package bolt_vend_api.v1;
+
+import "bolt_vend_api/model.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+service ManagerService {
+    // Gets an item.
+    rpc GetItem(GetItemRequest) returns (Item);
+
+    // Lists items.
+    rpc ListItems(ListItemsRequest) returns (ListItemsResponse);
+
+    // Creates a new item.
+    rpc CreateItem(CreateItemRequest) returns (Item);
+
+    // Updates an item.
+    rpc UpdateItem(UpdateItemRequest) returns (Item);
+
+    // Deletes an item.
+    rpc DeleteItem(DeleteItemRequest) returns (google.protobuf.Empty);
+
+    // Gets a machine.
+    rpc GetMachine(GetMachineRequest) returns (Machine);
+
+    // Lists machines.
+    rpc ListMachines(ListMachinesRequest) returns (ListMachinesResponse);
+
+    // Updates a machine.
+    rpc UpdateMachine(UpdateMachineRequest) returns (Machine);
+
+    // Deletes a machine.
+    rpc DeleteMachine(DeleteMachineRequest) returns (Machine);
+}
+
+message GetItemRequest {
+}
+
+message ListItemsRequest {
+    int32 page_size = 1;
+
+    string page_token = 2;
+}
+
+message ListItemsResponse {
+    repeated Item items = 1;
+
+    string next_page_token = 2;
+}
+
+message CreateItemRequest {
+    Item item = 1;
+}
+
+message UpdateItemRequest {
+    Item item = 1;
+
+    google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteItemRequest {
+    string name = 1;
+}
+
+message GetMachineRequest {
+    string name = 1;
+}
+
+message ListMachinesRequest {
+    int32 page_size = 1;
+
+    string page_token = 2;
+}
+
+message ListMachinesResponse {
+    repeated Machine machines = 1;
+
+    string next_page_token = 2;
+}
+
+message UpdateMachineRequest {
+    Machine machine = 1;
+
+    google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteMachineRequest {
+    string name = 1;
+}

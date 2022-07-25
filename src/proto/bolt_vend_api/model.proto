@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package bolt_vend_api.v1;
+
+// Data related to a vending machine.
+message Machine {
+    // The inventory of the vending machine.
+    Inventory inventory = 1;
+}
+
+// The inventory of a vending machine.
+message Inventory {
+    // The physical item slots on the vending machine.
+    repeated ItemSlot item_slots = 1;
+}
+
+// A physical item slot in a vending machine.
+message ItemSlot {
+    // The item contained in the slot.
+    Item item = 1;
+
+    // The amount of the item that is left.
+    int32 stock = 2;
+
+    // The cost of the item, in Satoshis.
+    int32 price_sats = 3;
+}
+
+// A snack or beverage item.
+message Item {
+    // The unique identifier of the item. Should be a UUID v4 string.
+    string id = 1;
+
+    // The name of the item that id displayed to users.
+    string display_name = 2;
+}
