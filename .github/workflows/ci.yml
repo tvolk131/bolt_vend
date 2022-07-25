@@ -23,4 +23,4 @@ jobs:
           cd ./src/proto
           go install github.com/googleapis/api-linter/cmd/api-linter@latest
           go install github.com/golang/protobuf/protoc-gen-go@latest
-          api-linter --proto-path=/api-common-protos bolt_vend_api/machine_service.proto bolt_vend_api/manager_service.proto bolt_vend_api/model.proto
+          api-linter --set-exit-status --proto-path=/api-common-protos bolt_vend_api/machine_service.proto bolt_vend_api/manager_service.proto bolt_vend_api/model.proto
