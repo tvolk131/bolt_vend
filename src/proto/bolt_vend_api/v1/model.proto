@@ -6,6 +6,9 @@ package bolt_vend_api.v1;
 message Machine {
     // The inventory of the vending machine.
     Inventory inventory = 1;
+    
+    // When the machine was first registered.
+    google.protobuf.Timestamp create_time = 2;
 }
 
 // The inventory of a vending machine.
@@ -26,11 +29,14 @@ message ItemSlot {
     int32 price_sats = 3;
 }
 
-// A snack or beverage item.
+// Top-level resource representing a snack or beverage item SKU.
 message Item {
-    // The unique identifier of the item. Should be a UUID v4 string.
-    string id = 1;
+    // The resource name of the item.
+    string name = 1;
 
-    // The name of the item that id displayed to users.
+    // The display name of the item.
     string display_name = 2;
+    
+    // When the item was created.
+    google.protobuf.Timestamp create_time = 2;
 }
