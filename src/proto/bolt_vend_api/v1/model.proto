@@ -2,13 +2,16 @@ syntax = "proto3";
 
 package bolt_vend_api.v1;
 
-// Data related to a vending machine.
+import "google/protobuf/timestamp.proto";
+
+// Data representing a physical vending machine.
 message Machine {
     // The inventory of the vending machine.
+    // Empty when machine is first initialized.
     Inventory inventory = 1;
     
     // When the machine was first registered.
-    google.protobuf.Timestamp create_time = 2;
+    google.protobuf.Timestamp register_time = 2;
 }
 
 // The inventory of a vending machine.
@@ -38,5 +41,5 @@ message Item {
     string display_name = 2;
     
     // When the item was created.
-    google.protobuf.Timestamp create_time = 2;
+    google.protobuf.Timestamp create_time = 3;
 }
