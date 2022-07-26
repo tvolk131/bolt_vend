@@ -35,57 +35,69 @@ service ManagerService {
     rpc DeleteMachine(DeleteMachineRequest) returns (Machine);
 }
 
+// Request message for GetItem.
 message GetItemRequest {
+    string name = 1;
 }
 
+// Request message for ListItems.
 message ListItemsRequest {
     int32 page_size = 1;
 
     string page_token = 2;
 }
 
+// Response message for ListItems.
 message ListItemsResponse {
     repeated Item items = 1;
 
     string next_page_token = 2;
 }
 
+// Request message for CreateItem.
 message CreateItemRequest {
     Item item = 1;
 }
 
+// Request message for UpdateItem.
 message UpdateItemRequest {
     Item item = 1;
 
     google.protobuf.FieldMask update_mask = 2;
 }
 
+// Request message for DeleteItem.
 message DeleteItemRequest {
     string name = 1;
 }
 
+// Request message for GetMachine.
 message GetMachineRequest {
     string name = 1;
 }
 
+// Request message for ListMachines.
 message ListMachinesRequest {
     int32 page_size = 1;
 
     string page_token = 2;
 }
 
+// Response message for ListMachines.
 message ListMachinesResponse {
     repeated Machine machines = 1;
 
     string next_page_token = 2;
 }
 
+// Request message for UpdateMachine.
 message UpdateMachineRequest {
     Machine machine = 1;
 
     google.protobuf.FieldMask update_mask = 2;
 }
 
+// Request message for DeleteMachine.
 message DeleteMachineRequest {
     string name = 1;
 }
