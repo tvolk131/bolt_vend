@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package bolt_vend_api.v1;
 
-import "bolt_vend_api/model.proto";
+import "bolt_vend_api/v1/model.proto";
 import "google/protobuf/timestamp.proto";
 
 // This service is intended for vending machines to
