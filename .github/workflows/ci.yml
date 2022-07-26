@@ -19,8 +19,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      # TODO - Remove the `--disable-rule` arguments.
       - run: |
           cd ./src/proto
           go install github.com/googleapis/api-linter/cmd/api-linter@latest
           go install github.com/golang/protobuf/protoc-gen-go@latest
-          api-linter --set-exit-status --proto-path=/api-common-protos bolt_vend_api/v1/machine_service.proto bolt_vend_api/v1/manager_service.proto bolt_vend_api/v1/model.proto
+          api-linter --set-exit-status --proto-path=/api-common-protos bolt_vend_api/v1/machine_service.proto bolt_vend_api/v1/manager_service.proto bolt_vend_api/v1/model.proto --disable-rule 0191 --disable-rule 0135 --disable-rule 0127 --disable-rule 0133 --disable-rule 0131 --disable-rule 0134 --disable-rule 0214
