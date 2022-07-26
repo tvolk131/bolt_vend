@@ -1,12 +1,12 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-const SRC_DIR = path.join(__dirname, '/src/client');
-const DIST_DIR = path.join(__dirname, '/src/client/dist');
+const CLIENT_DIR = path.join(__dirname, '/client');
+const DIST_DIR = path.join(__dirname, '/client/dist');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const config: webpack.Configuration = {
-  entry: `${SRC_DIR}/index.tsx`,
+  entry: `${CLIENT_DIR}/index.tsx`,
   output: {
     filename: 'bundle.js',
     path: DIST_DIR
