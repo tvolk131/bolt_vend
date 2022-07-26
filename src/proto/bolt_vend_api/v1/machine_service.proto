@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package bolt_vend_api.v1;
+
+import "bolt_vend_api/v1/model.proto";
+import "google/protobuf/timestamp.proto";
+
+// This service is intended for vending machines to
+// use to connect to the central management server.
+// It handles invoice generation, payment confirmation,
+// and propogating updates to each machine. This service
+// consists entirely of custom methods and does not
+// conform to the AIP standard methods at all.
+service MachineService {
+    // Called whenever a machine is booted or rebooted. Returns any information
+    // the machine needs to start running, such as its inventory.
+    rpc InitMachine(InitMachineRequest) returns (InitMachineResponse);
+
+    // Generates an invoice for a particular item. Typically called when a user
+    // is about to purchase an item - although machines can proactively fetch
+    // invoices and cache them for faster checkout.
+    rpc GetInvoice(GetInvoiceRequest) returns (GetInvoiceResponse);
+
+    // Allows for the server to push changes to a machine. It is expected for each
+    // machine to call this method a few times per minute to ensure that they are
+    // synced up.
+    rpc GetMachineUpdates(GetMachineUpdatesRequest) returns (GetMachineUpdatesResponse);
+}
+
+// Request message for InitMachine.
+message InitMachineRequest {
+    // The ID of the machine.
+    string device_id = 1;
+}
+
+// Response message for InitMachine.
+message InitMachineResponse {
+    // The machine data for the initializing machine.
+    Machine machine = 1;
+}
+
+// Request message for GetInvoice.
+message GetInvoiceRequest {
+    // The ID of the machine that is requesting the invoice.
+    string device_id = 1;
+
+    // The ID of the item that is being potentially purchased.
+    string item_id = 2;
+}
+
+// Response message for GetInvoice.
+message GetInvoiceResponse {
+    // The Lightning Network invoice to display to the user.
+    string invoice = 1;
+
+    // The time when the invoice will expire.
+    // This can be extracted from the invoice text, but
+    // is included separately for convenience.
+    google.protobuf.Timestamp expire_time = 2;
+}
+
+// Request message for GetMachineUpdates.
+message GetMachineUpdatesRequest {
+    // The ID of the machine.
+    string device_id = 1;
+}
+
+// Response message for GetMachineUpdates.
+message GetMachineUpdatesResponse {
+    // The updated machine data.
+    Machine machine = 1;
+}

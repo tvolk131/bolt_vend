@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package bolt_vend_api.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Data representing a physical vending machine.
+message Machine {
+    // The inventory of the vending machine.
+    // Empty when machine is first initialized.
+    Inventory inventory = 1;
+    
+    // When the machine was first registered.
+    google.protobuf.Timestamp register_time = 2;
+}
+
+// The inventory of a vending machine.
+message Inventory {
+    // The physical item slots on the vending machine.
+    repeated ItemSlot item_slots = 1;
+}
+
+// A physical item slot in a vending machine.
+message ItemSlot {
+    // The item contained in the slot.
+    Item item = 1;
+
+    // The amount of the item that is left.
+    int32 stock = 2;
+
+    // The cost of the item, in Satoshis.
+    int32 price_sats = 3;
+}
+
+// Top-level resource representing a snack or beverage item SKU.
+message Item {
+    // The resource name of the item.
+    string name = 1;
+
+    // The display name of the item.
+    string display_name = 2;
+    
+    // When the item was created.
+    google.protobuf.Timestamp create_time = 3;
+}

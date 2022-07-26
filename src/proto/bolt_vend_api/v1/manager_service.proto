@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package bolt_vend_api.v1;
+
+import "bolt_vend_api/v1/model.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+// Service for managing configuration, inventory, and stats for a fleet of machines.
+service ManagerService {
+    // Gets an item.
+    rpc GetItem(GetItemRequest) returns (Item);
+
+    // Lists items.
+    rpc ListItems(ListItemsRequest) returns (ListItemsResponse);
+
+    // Creates a new item.
+    rpc CreateItem(CreateItemRequest) returns (Item);
+
+    // Updates an item.
+    rpc UpdateItem(UpdateItemRequest) returns (Item);
+
+    // Deletes an item.
+    rpc DeleteItem(DeleteItemRequest) returns (google.protobuf.Empty);
+
+    // Gets a machine.
+    rpc GetMachine(GetMachineRequest) returns (Machine);
+
+    // Lists machines.
+    rpc ListMachines(ListMachinesRequest) returns (ListMachinesResponse);
+
+    // Updates a machine.
+    rpc UpdateMachine(UpdateMachineRequest) returns (Machine);
+
+    // Deletes a machine.
+    rpc DeleteMachine(DeleteMachineRequest) returns (Machine);
+}
+
+// Request message for GetItem.
+message GetItemRequest {
+    // The name of the item to retrieve.
+    string name = 1;
+}
+
+// Request message for ListItems.
+message ListItemsRequest {
+    // The maximum page size.
+    // If unspecified, at most 50 items will be returned.
+    // The maximum value is 1000; values above 1000 will be coerced to 1000.
+    int32 page_size = 1;
+
+    // Page token returned from a previous rpc.
+    string page_token = 2;
+}
+
+// Response message for ListItems.
+message ListItemsResponse {
+    // The requested items.
+    repeated Item items = 1;
+
+    // Opaque string. Can be passed to a subsequent
+    // request to retrieve the next page of items.
+    string next_page_token = 2;
+}
+
+// Request message for CreateItem.
+message CreateItemRequest {
+    // The item to create.
+    Item item = 1;
+}
+
+// Request message for UpdateItem.
+message UpdateItemRequest {
+    // The item to update.
+    Item item = 1;
+
+    // The list of fields to be updated.
+    google.protobuf.FieldMask update_mask = 2;
+}
+
+// Request message for DeleteItem.
+message DeleteItemRequest {
+    // The name of the item to delete.
+    string name = 1;
+}
+
+// Request message for GetMachine.
+message GetMachineRequest {
+    // The name of the machine to retrieve.
+    string name = 1;
+}
+
+// Request message for ListMachines.
+message ListMachinesRequest {
+    // The maximum page size.
+    // If unspecified, at most 50 items will be returned.
+    // The maximum value is 1000; values above 1000 will be coerced to 1000.
+    int32 page_size = 1;
+
+    // Page token returned from a previous rpc.
+    string page_token = 2;
+}
+
+// Response message for ListMachines.
+message ListMachinesResponse {
+    // The requested machines.
+    repeated Machine machines = 1;
+
+    // Opaque string. Can be passed to a subsequent
+    // request to retrieve the next page of items.
+    string next_page_token = 2;
+}
+
+// Request message for UpdateMachine.
+message UpdateMachineRequest {
+    // The machine to update.
+    Machine machine = 1;
+
+    // The list of fields to be updated.
+    google.protobuf.FieldMask update_mask = 2;
+}
+
+// Request message for DeleteMachine.
+message DeleteMachineRequest {
+    // The name of the machine to delete.
+    string name = 1;
+}

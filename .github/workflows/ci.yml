@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  proto-lint:
+    name: Proto Lint
+    container: golang:latest
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # TODO - Remove the `--disable-rule` arguments.
+      - run: |
+          cd ./src/proto
+          go install github.com/googleapis/api-linter/cmd/api-linter@latest
+          go install github.com/golang/protobuf/protoc-gen-go@latest
+          api-linter --set-exit-status --proto-path=/api-common-protos bolt_vend_api/v1/machine_service.proto bolt_vend_api/v1/manager_service.proto bolt_vend_api/v1/model.proto --disable-rule 0191 --disable-rule 0135 --disable-rule 0127 --disable-rule 0133 --disable-rule 0131 --disable-rule 0134 --disable-rule 0214 --disable-rule 0132 --disable-rule 0123
