@@ -4,3 +4,5 @@ machine/client/dist/bundle.js
 machine/client/dist/bundle.js.LICENSE.txt
 manager/server/src/proto/bolt_vend_api.v1.rs
 manager/server/src/proto/google.protobuf.rs
+manager/client/src/dist/bundle.js
+manager/client/src/dist/bundle.js.LICENSE.txt
