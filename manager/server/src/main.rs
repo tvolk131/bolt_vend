@@ -20,8 +20,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Starting server on port {}", grpc_port);
     let grpc_server_future = Server::builder()
-        .add_service(MachineServiceServer::new(MachineServiceImpl::new()))
-        .add_service(ManagerServiceServer::new(ManagerServiceImpl::new()))
+        .add_service(tonic_web::enable(MachineServiceServer::new(
+            MachineServiceImpl::new(),
+        )))
+        .add_service(tonic_web::enable(ManagerServiceServer::new(
+            ManagerServiceImpl::new(),
+        )))
         .serve(grpc_address);
 
     println!("Starting frontend server on port {}", 8080);
